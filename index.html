@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Immomedia Kundenportal</title>
+    <meta name="description" content="Laden Sie Ihre Unterlagen für Ihr Wunschobjekt hoch." />
+    <link rel="preconnect" href="https://api.fontshare.com" />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&f[]=general-sans@500,600,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./object-catalog.js" defer></script>
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#intake-form">Zum Formular springen</a>
+    <header class="app-header">
+      <div class="brand" aria-label="Immomedia Kundenportal">
+        <svg class="brand-mark" viewBox="0 0 48 48" role="img" aria-label="Immomedia Mark">
+          <rect x="7" y="7" width="34" height="34" rx="10" fill="none" stroke="currentColor" stroke-width="3" />
+          <path d="M16 32V18l8 8 8-8v14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <div>
+          <strong>Immomedia Kundenportal</strong>
+          <span>Unterlagen sicher einreichen</span>
+        </div>
+      </div>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Darstellung wechseln">
+        <span aria-hidden="true">◐</span>
+      </button>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Ihr nächster Schritt</p>
+          <h1 id="page-title">Unterlagen für Ihr Wunschobjekt einreichen</h1>
+          <p>
+            Füllen Sie das Formular aus und laden Sie Ihre Pflichtunterlagen hoch.
+            Wir prüfen alles intern und melden uns schnellstmöglich bei Ihnen.
+          </p>
+        </div>
+        <div class="hero-card" aria-label="Ablauf">
+          <div class="flow-step active">Unterlagen</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">Prüfung</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">Rückmeldung</div>
+        </div>
+      </section>
+
+      <section class="workspace" aria-label="Formular">
+        <form id="intake-form" class="form-panel" data-testid="form-intake" novalidate>
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Ihre Angaben</p>
+              <h2>Objektanfrage</h2>
+            </div>
+            <span class="status-pill" data-status-pill data-testid="status-validation">Bereit</span>
+          </div>
+
+          <!-- Hidden internal fields -->
+          <input type="hidden" name="requestId" data-testid="input-request-id" />
+          <input type="hidden" name="objectType" value="Neubauprojekt" />
+          <input type="hidden" name="objectStatus" data-testid="input-object-status" />
+          <input type="hidden" name="address" data-testid="input-address" />
+          <input type="hidden" name="objectId" />
+
+          <fieldset>
+            <legend>Ihr Objekt</legend>
+            <div class="grid">
+              <label>
+                Projekt auswählen
+                <select data-testid="select-object-id" name="objectId" required>
+                  <option value="">Bitte Projekt wählen</option>
+                </select>
+              </label>
+            </div>
+            <div class="object-summary" data-object-summary data-testid="card-object-summary">
+              Bitte wählen Sie Ihr Wunschprojekt aus.
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Ihre Kontaktdaten</legend>
+            <div class="grid two">
+              <label>
+                Vorname und Nachname *
+                <input data-testid="input-contact-name" name="contactName" required placeholder="Max Mustermann" />
+              </label>
+              <label>
+                E-Mail-Adresse *
+                <input data-testid="input-contact-email" name="contactEmail" type="email" required placeholder="ihre@email.de" />
+              </label>
+              <label>
+                Telefon optional
+                <input data-testid="input-lead-phone" name="leadPhone" placeholder="+49 89 123456" />
+              </label>
+              <label>
+                Firma optional
+                <input data-testid="input-lead-name" name="leadName" placeholder="Nur falls zutreffend" />
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Pflichtunterlagen hochladen</legend>
+            <p style="color: var(--color-muted); font-size: 0.9rem; margin: 0 0 1rem;">
+              Bitte laden Sie alle drei Pflichtunterlagen hoch, um Ihre Anfrage abzuschließen.
+            </p>
+            <label>
+              Ausweis (Pflicht)
+              <input
+                data-testid="input-document-id"
+                data-document-type="id_document"
+                name="documents"
+                type="file"
+                accept=".pdf,.jpg,.jpeg,.png,.heic"
+                required
+              />
+              <span class="field-help">Personalausweis oder Reisepass als PDF oder Foto.</span>
+            </label>
+            <label>
+              Finanzierungsbestätigung (Pflicht)
+              <input
+                data-testid="input-document-financing"
+                data-document-type="financing_confirmation"
+                name="documents"
+                type="file"
+                accept=".pdf,.jpg,.jpeg,.png,.heic,.doc,.docx"
+                required
+              />
+              <span class="field-help">Bank- oder Finanzierungsnachweis Ihrer Hausbank.</span>
+            </label>
+            <label>
+              Reservierungsbestätigung (Pflicht)
+              <input
+                data-testid="input-document-reservation"
+                data-document-type="reservation_confirmation"
+                name="documents"
+                type="file"
+                accept=".pdf,.jpg,.jpeg,.png,.heic,.doc,.docx"
+                required
+              />
+              <span class="field-help">Ihre Reservierung oder Vormerkung des Objekts.</span>
+            </label>
+            <label>
+              Weitere Unterlagen optional
+              <input
+                data-testid="input-document-optional"
+                data-document-type="optional"
+                name="documents"
+                type="file"
+                multiple
+                accept=".pdf,.jpg,.jpeg,.png,.heic,.doc,.docx"
+              />
+              <span class="field-help">Zusätzliche Dokumente falls gewünscht.</span>
+            </label>
+            <div class="file-list" data-file-list data-testid="list-files">Noch keine Unterlagen ausgewählt.</div>
+            <label class="checkbox-row">
+              <input data-testid="checkbox-consent" name="consent" type="checkbox" required />
+              <span>Ich bestätige, dass diese Unterlagen zur Bearbeitung meiner Anfrage an Immomedia übermittelt werden dürfen.</span>
+            </label>
+          </fieldset>
+
+          <!-- Internal n8n field hidden -->
+          <input type="hidden" name="webhookUrl" data-testid="input-webhook-url" />
+
+          <div class="actions">
+            <button class="primary" type="submit" data-testid="button-submit">Anfrage absenden</button>
+          </div>
+          <div class="result customer-result" data-testid="status-customer-submit" data-customer-result>
+            Bitte Kontaktdaten eingeben, Objekt auswählen und alle drei Pflichtunterlagen hochladen.
+          </div>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
